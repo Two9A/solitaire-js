@@ -1,0 +1,99 @@
+The core of the thing is a way to generate valid moves given a game state. First to the card spec:
+
+It's a bitfield: XX FU ST ST RK RK RK RK
+FU: Face up?
+ST: Suit (Ace, Heart, Club, Diamond); bit 4 specifies isRed
+RK: 1-13
+
+Then we have the game state:
+
+{
+  "stock": [...],
+  "waste", [...],
+  "foundations": [
+     [...], // Ace
+     [...], // Heart
+     [...], // Club
+     [...]  // Diamond
+  ],
+  "tableaus": [
+     [...],
+     [...],
+     [...],
+     [...],
+     [...],
+     [...],
+     [...]
+  ]
+}
+
+The next-state generator is an array of functions that, given a JSON string of game state, will each return an array of possible next state JSON's (JSON because we want immutable state for the DFS recursion).
+
+Possible next states in order of preference:
+
+- Waste onto foundation:
+  - IF:
+    - There's at least one card on the waste;
+    - Either the top of waste is an Ace AND the corresponding foundation is empty, OR the corresponding foundation for the top of waste is the rank one below;
+  - THEN:
+    - Pop this card from the waste;
+    - Push it onto the corresponding foundation
+- Top of a tableau onto foundation:
+  - For each tableau:
+    - IF:
+      - This tableau is not empty;
+      - Either the top of tableau is an Ace AND the corresponding foundation is empty, OR the corresponding foundation for the top of tableau is the rank one below;
+    - THEN:
+      - Pop this card from the tableau;
+      - Push it onto the corresponding foundation
+- King-stack from a tableau to an empty tableau:
+  - For each non-empty tableau A:
+    - IF:
+      - This tableau has at least two cards;
+      - The bottom FU card is a King;
+      - There exists at least one empty tableau B;
+    - THEN:
+      - Pop all FU cards from A into a stack;
+      - Push from the stack to B;
+      - Set FU on the end card in A
+- Non-king stack from a tableau to an eligible tableau:
+  - For each non-empty tableau A:
+    - For each FU card CC in A, starting from the top (end):
+      - For each non-empty tableau B that isn't A:
+        - IF:
+          - The top of B is one rank higher than CC AND the opposite redness;
+        - THEN:
+          - Pop all FU cards starting at CC from A into a stack;
+          - Push from the stack to B;
+          - Set FU on the end card in A
+- King waste to an empty tableau:
+  - IF:
+    - There's at least one card in the waste;
+    - The top of waste is a King;
+    - There exists at least one empty tableau;
+  - THEN:
+    - Pop from the waste;
+    - Push to the first empty tableau
+- Non-king waste to an eligible tableau:
+  - For each non-empty tableau A:
+    - IF:
+      - The top of A is one rank higher than the top of waste AND the opposite redness;
+    - THEN:
+      - Pop from the waste;
+      - Push to A
+- Draw:
+  - IF:
+    - There's at least one card in the stock;
+  - THEN:
+    - Pop from the stock;
+    - Set FU;
+    - Push to waste
+- Reset:
+  - IF:
+    - There's at least one card in the waste;
+    - There's nothing in the stock;
+ - THEN:
+    - Reverse the waste;
+    - Unset FU for each card in the waste;
+    - Copy the waste to the stock;
+    - Clear the waste

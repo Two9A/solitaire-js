@@ -1,0 +1,95 @@
+:root { --card-width: 112px; --card-height: 163px; --card-stack-gap: 40px; }
+* { margin: 0; padding: 0; }
+body { font-family: sans-serif; }
+#top-bar { background: black; color: white; padding: 8px; }
+#field { background: green; padding: 32px; width: calc(100vw - 64px); height: calc(100vh - 64px); display: grid; grid-template-areas: "stock waste foundations" "tableaus tableaus tableaus"; grid-template-columns: var(--card-width) var(--card-width) 1fr; grid-template-rows: var(--card-height) 1fr; gap: 32px; }
+#stock { grid-area: stock; }
+#waste { grid-area: waste; }
+#foundations { grid-area: foundations; display: flex; gap: 32px; justify-content: flex-end; }
+#tableaus { grid-area: tableaus; display: flex; justify-content: space-between; gap: 32px; }
+#tableaus > li { width: var(--card-width); }
+.card { display: block; overflow: hidden; text-indent: -9999px; height: 163px; width: 112px; background-repeat: no-repeat; background-position: center center; border-radius: 4px; background-size: cover; border: 1px solid black; }
+.s1 { background-image: url(ace_of_spades.svg); }
+.s2 { background-image: url(2_of_spades.svg); }
+.s3 { background-image: url(3_of_spades.svg); }
+.s4 { background-image: url(4_of_spades.svg); }
+.s5 { background-image: url(5_of_spades.svg); }
+.s6 { background-image: url(6_of_spades.svg); }
+.s7 { background-image: url(7_of_spades.svg); }
+.s8 { background-image: url(8_of_spades.svg); }
+.s9 { background-image: url(9_of_spades.svg); }
+.s10 { background-image: url(10_of_spades.svg); }
+.s11 { background-image: url(jack_of_spades.svg); }
+.s12 { background-image: url(queen_of_spades.svg); }
+.s13 { background-image: url(king_of_spades.svg); }
+.h1 { background-image: url(ace_of_hearts.svg); }
+.h2 { background-image: url(2_of_hearts.svg); }
+.h3 { background-image: url(3_of_hearts.svg); }
+.h4 { background-image: url(4_of_hearts.svg); }
+.h5 { background-image: url(5_of_hearts.svg); }
+.h6 { background-image: url(6_of_hearts.svg); }
+.h7 { background-image: url(7_of_hearts.svg); }
+.h8 { background-image: url(8_of_hearts.svg); }
+.h9 { background-image: url(9_of_hearts.svg); }
+.h10 { background-image: url(10_of_hearts.svg); }
+.h11 { background-image: url(jack_of_hearts.svg); }
+.h12 { background-image: url(queen_of_hearts.svg); }
+.h13 { background-image: url(king_of_hearts.svg); }
+.c1 { background-image: url(ace_of_clubs.svg); }
+.c2 { background-image: url(2_of_clubs.svg); }
+.c3 { background-image: url(3_of_clubs.svg); }
+.c4 { background-image: url(4_of_clubs.svg); }
+.c5 { background-image: url(5_of_clubs.svg); }
+.c6 { background-image: url(6_of_clubs.svg); }
+.c7 { background-image: url(7_of_clubs.svg); }
+.c8 { background-image: url(8_of_clubs.svg); }
+.c9 { background-image: url(9_of_clubs.svg); }
+.c10 { background-image: url(10_of_clubs.svg); }
+.c11 { background-image: url(jack_of_clubs.svg); }
+.c12 { background-image: url(queen_of_clubs.svg); }
+.c13 { background-image: url(king_of_clubs.svg); }
+.d1 { background-image: url(ace_of_diamonds.svg); }
+.d2 { background-image: url(2_of_diamonds.svg); }
+.d3 { background-image: url(3_of_diamonds.svg); }
+.d4 { background-image: url(4_of_diamonds.svg); }
+.d5 { background-image: url(5_of_diamonds.svg); }
+.d6 { background-image: url(6_of_diamonds.svg); }
+.d7 { background-image: url(7_of_diamonds.svg); }
+.d8 { background-image: url(8_of_diamonds.svg); }
+.d9 { background-image: url(9_of_diamonds.svg); }
+.d10 { background-image: url(10_of_diamonds.svg); }
+.d11 { background-image: url(jack_of_diamonds.svg); }
+.d12 { background-image: url(queen_of_diamonds.svg); }
+.d13 { background-image: url(king_of_diamonds.svg); }
+.card.facedown { background-image: url(cardback.svg); }
+ul, ol { list-style: none inside; }
+#tableaus ol { position: relative; width: var(--card-width); }
+#tableaus ol li { position: absolute; }
+li:nth-child(2) { top: calc(var(--card-stack-gap) * 1); }
+li:nth-child(3) { top: calc(var(--card-stack-gap) * 2); }
+li:nth-child(4) { top: calc(var(--card-stack-gap) * 3); }
+li:nth-child(5) { top: calc(var(--card-stack-gap) * 4); }
+li:nth-child(6) { top: calc(var(--card-stack-gap) * 5); }
+li:nth-child(7) { top: calc(var(--card-stack-gap) * 6); }
+li:nth-child(8) { top: calc(var(--card-stack-gap) * 7); }
+li:nth-child(9) { top: calc(var(--card-stack-gap) * 8); }
+li:nth-child(10) { top: calc(var(--card-stack-gap) * 9); }
+li:nth-child(11) { top: calc(var(--card-stack-gap) * 10); }
+li:nth-child(12) { top: calc(var(--card-stack-gap) * 11); }
+li:nth-child(13) { top: calc(var(--card-stack-gap) * 12); }
+li:nth-child(14) { top: calc(var(--card-stack-gap) * 13); }
+li:nth-child(15) { top: calc(var(--card-stack-gap) * 14); }
+li:nth-child(16) { top: calc(var(--card-stack-gap) * 15); }
+li:nth-child(17) { top: calc(var(--card-stack-gap) * 16); }
+li:nth-child(18) { top: calc(var(--card-stack-gap) * 17); }
+li:nth-child(19) { top: calc(var(--card-stack-gap) * 18); }
+li:nth-child(20) { top: calc(var(--card-stack-gap) * 19); }
+li:nth-child(21) { top: calc(var(--card-stack-gap) * 20); }
+li:nth-child(22) { top: calc(var(--card-stack-gap) * 21); }
+li:nth-child(23) { top: calc(var(--card-stack-gap) * 22); }
+li:nth-child(24) { top: calc(var(--card-stack-gap) * 23); }
+li:nth-child(25) { top: calc(var(--card-stack-gap) * 24); }
+li:nth-child(26) { top: calc(var(--card-stack-gap) * 25); }
+li:nth-child(27) { top: calc(var(--card-stack-gap) * 26); }
+li:nth-child(28) { top: calc(var(--card-stack-gap) * 27); }
+li:nth-child(29) { top: calc(var(--card-stack-gap) * 28); }
